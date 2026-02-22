@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5–8 Sinf Mavzulari — Kelajak Soati</title>
+    <meta name="description" content="5-8 sinf o'quvchilari uchun Kelajak Soati mavzulari">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topics.css">
+</head>
+
+<body data-grade="5-8">
+
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2" style="background:var(--junior)"></div>
+    </div>
+
+    <header class="header scrolled" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="back-btn" title="Orqaga">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <div class="logo-icon" style="background:linear-gradient(135deg,#0072ff,#00c6ff)">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div>
+                    <span class="logo-title">5 – 8 Sinf</span>
+                    <span class="logo-sub">Kelajak Soati Mavzulari</span>
+                </div>
+            </div>
+            <button class="theme-btn" id="themeBtn" aria-label="Mavzuni o'zgartirish">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="topics-main">
+        <div class="topics-container">
+
+            <!-- Page Hero -->
+            <div class="page-hero junior">
+                <div class="page-hero-content">
+                    <div class="grade-pill"><i class="fas fa-seedling"></i> O'rta bo'g'in</div>
+                    <h1>5 – 8 Sinf <span>Mavzulari</span></h1>
+                    <p>Yil davomida o'tiladigan barcha mavzular. Mavzu ustiga bosib batafsil ma'lumot oling.</p>
+                </div>
+                <div class="page-hero-stat">
+                    <div class="stat-box"><span id="totalCount">...</span><small>Ta mavzu</small></div>
+                </div>
+            </div>
+
+            <div class="topics-grid" id="topicsGrid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Mavzular yuklanmoqda...</p>
+                </div>
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display:none">
+                <i class="fas fa-inbox"></i>
+                <h3>Hozircha mavzu yo'q</h3>
+                <p>Tez orada mavzular qo'shiladi</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="topics.js"></script>
+    <script>
+        // Theme
+        const themeBtn = document.getElementById('themeBtn');
+        const icon = themeBtn.querySelector('i');
+        if (localStorage.getItem('ks_theme') === 'light') {
+            document.body.classList.add('light-mode');
+            icon.className = 'fas fa-moon';
+        }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('ks_theme', isLight ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>

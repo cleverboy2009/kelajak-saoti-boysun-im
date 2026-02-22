@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavzu — Kelajak Soati</title>
+    <meta name="description" content="Kelajak Soati mavzu tafsiloti">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ---- Detail Layout ---- */
+        .detail-main {
+            min-height: 100vh;
+            padding-top: var(--header-h);
+        }
+
+        .detail-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 5rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .82rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            transition: color .2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text);
+        }
+
+        .breadcrumb i {
+            font-size: .6rem;
+            opacity: .5;
+        }
+
+        /* Header */
+        .detail-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            animation: fadeUp .6s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-meta {
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .detail-hafta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .4px;
+        }
+
+        .detail-date {
+            color: var(--text-dim);
+            font-size: .82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-grade-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: .78rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .detail-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.7rem, 5vw, 2.6rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .detail-qisqa {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-weight: 300;
+            padding-left: 1rem;
+            border-left: 3px solid;
+        }
+
+        /* Content Body — Markdown rendered */
+        .detail-body {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            animation: fadeUp .7s .1s ease both;
+        }
+
+        body.light-mode .detail-body {
+            background: #fff;
+            border-color: #e2e8f0;
+        }
+
+        .detail-body h2 {
+            font-family: var(--font-heading);
+            font-size: 1.45rem;
+            color: var(--text);
+            margin: 2.5rem 0 .85rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-body h2:first-child {
+            margin-top: 0;
+        }
+
+        .detail-body h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 1.75rem 0 .6rem;
+        }
+
+        .detail-body p {
+            color: var(--text-muted);
+            line-height: 1.85;
+            margin-bottom: 1rem;
+        }
+
+        .detail-body ul,
+        .detail-body ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .detail-body li {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: .3rem;
+        }
+
+        .detail-body strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .detail-body em {
+            font-style: italic;
+            opacity: .85;
+        }
+
+        .detail-body blockquote {
+            border-left: 3px solid;
+            padding: .75rem 1.25rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+
+        .detail-body blockquote p {
+            margin: 0;
+            font-size: 1.02rem;
+        }
+
+        .detail-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        .detail-body a {
+            color: var(--junior);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity .2s;
+        }
+
+        .detail-body a:hover {
+            opacity: .75;
+        }
+
+        .detail-body code {
+            background: rgba(255, 255, 255, .07);
+            border-radius: 6px;
+            padding: 2px 8px;
+            font-size: .88em;
+            font-family: monospace;
+        }
+
+        /* ---- VIDEO SECTION ---- */
+        .videos-section {
+            margin-top: 2.5rem;
+            animation: fadeUp .8s .2s ease both;
+        }
+
+        .videos-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+        }
+
+        .videos-title i {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: .9rem;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .video-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        body.light-mode .video-card {
+            background: #fff;
+            border-color: #e2e8f0;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+        }
+
+        .video-label {
+            padding: .75rem 1rem;
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        body.light-mode .video-label {
+            border-color: #e2e8f0;
+        }
+
+        .video-label i {
+            color: #ff4444;
+            font-size: .85rem;
+        }
+
+        .video-frame-wrap {
+            position: relative;
+            padding-top: 56.25%;
+            /* 16:9 */
+        }
+
+        .video-frame-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ---- Back button ---- */
+        .back-to-list {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2.5rem;
+            padding: 11px 24px;
+            border-radius: 50px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: .9rem;
+            font-weight: 500;
+            transition: all .3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-to-list:hover {
+            color: var(--text);
+            border-color: var(--border-bright);
+            transform: translateX(-4px);
+        }
+
+        /* ---- Not found ---- */
+        .not-found {
+            text-align: center;
+            padding: 6rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .not-found i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: .3;
+            display: block;
+        }
+
+        .not-found h2 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: .5rem;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 700px) {
+            .detail-container {
+                padding: 1.5rem 1rem 4rem;
+            }
+
+            .detail-body {
+                padding: 1.75rem 1.25rem;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header class="header scrolled" id="header">
+        <div class="header-inner">
+            <button class="back-btn" id="backBtn" title="Orqaga">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="logo" id="headerLogo">
+                <div class="logo-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <div>
+                    <span class="logo-title" id="headerTitle">Mavzu</span>
+                    <span class="logo-sub">Kelajak Soati</span>
+                </div>
+            </div>
+            <button class="theme-btn" id="themeBtn" aria-label="Mavzuni o'zgartirish">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="detail-main">
+        <div class="detail-container" id="detailContainer">
+            <div style="text-align:center;padding:5rem 2rem;color:var(--text-muted)">
+                <div class="spinner" style="margin:0 auto 1.5rem"></div>
+                <p>Yuklanmoqda...</p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .spinner {
+            width: 38px;
+            height: 38px;
+            border: 3px solid var(--border);
+            border-top-color: var(--junior);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script src="data.js"></script>
+    <script>
+        // ---- URL params ----
+        const params = new URLSearchParams(location.search);
+        const GRADE = params.get('grade') || '9-11';
+        const ID = parseInt(params.get('id') || '0');
+        const BACK = GRADE === '5-8' ? 'mavzular-5-8.html' : 'mavzular-9-11.html';
+
+        // ---- Back button ----
+        document.getElementById('backBtn').addEventListener('click', () => {
+            history.length > 1 ? history.back() : location.href = BACK;
+        });
+
+        // ---- Theme ----
+        const themeBtn = document.getElementById('themeBtn');
+        const tIcon = themeBtn.querySelector('i');
+        if (localStorage.getItem('ks_theme') === 'light') {
+            document.body.classList.add('light-mode');
+            tIcon.className = 'fas fa-moon';
+        }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            tIcon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('ks_theme', isLight ? 'light' : 'dark');
+        });
+
+        // ---- Load data ----
+        async function getData() {
+            // 0. data.js dan tekshiramiz (file:// uchun)
+            if (window.KS_DATA) return window.KS_DATA;
+
+            try {
+                const res = await fetch('api.php?action=get', { cache: 'no-cache' });
+                if (res.ok) { const j = await res.json(); if (j.success) return j.data; }
+            } catch { }
+            try {
+                const cached = localStorage.getItem('ks_data');
+                if (cached) return JSON.parse(cached);
+            } catch { }
+            try {
+                const res = await fetch('data.json', { cache: 'no-cache' });
+                if (res.ok) return await res.json();
+            } catch { }
+            return null;
+        }
+
+        // ---- Markdown renderer ----
+        function renderMd(md) {
+            if (!md) return '';
+            let html = md
+                // Escape HTML first
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                // Headings
+                .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+                // Bold & italic
+                .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                // Blockquote
+                .replace(/^&gt; (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
+                // HR
+                .replace(/^---$/gm, '<hr>')
+                // Ordered list items
+                .replace(/^\d+\. (.+)$/gm, '<li class="ol-item">$1</li>')
+                // Unordered list items
+                .replace(/^[-*] (.+)$/gm, '<li>$1</li>')
+                // Links — restore < > around URLs, then make anchors
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+                // Code inline
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                // Paragraphs — wrap non-tag lines
+                .split('\n');
+
+            // Wrap consecutive <li> in <ul> or <ol>
+            let inUl = false, inOl = false;
+            html = html.map(line => {
+                if (line.startsWith('<li class="ol-item">')) {
+                    const item = '<li>' + line.replace('<li class="ol-item">', '').replace('</li>', '') + '</li>';
+                    if (!inOl) { inOl = true; return '<ol>' + item; }
+                    return item;
+                }
+                if (inOl) { inOl = false; return '</ol>' + line; }
+
+                if (line.startsWith('<li>') && !line.startsWith('<li class')) {
+                    if (!inUl) { inUl = true; return '<ul>' + line; }
+                    return line;
+                }
+                if (inUl) { inUl = false; return '</ul>' + line; }
+                return line;
+            });
+            if (inUl) html.push('</ul>');
+            if (inOl) html.push('</ol>');
+
+            // Join and wrap bare text lines in <p>
+            return html.join('\n')
+                .replace(/\n{2,}/g, '\n')
+                .split('\n')
+                .map(line => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return '';
+                    if (/^<(h[1-6]|ul|ol|li|blockquote|hr|p)/.test(trimmed)) return trimmed;
+                    return `<p>${trimmed}</p>`;
+                })
+                .join('\n');
+        }
+
+        // ---- Sana formatlash ----
+        function fmtDate(d) {
+            try {
+                return new Date(d).toLocaleDateString('uz-UZ', { day: '2-digit', month: 'long', year: 'numeric' });
+            } catch { return d; }
+        }
+
+        // ---- YouTube embed ----
+        function buildVideos(videos, color) {
+            if (!videos || !videos.length) return '';
+            const cards = videos.map((v, i) => {
+                // Ensure origin is handled for file:// protocol
+                const origin = window.location.protocol === 'file:' ? '' : `&origin=${encodeURIComponent(location.origin)}`;
+                const embedUrl = `https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1${origin}`;
+
+                return `
+                <div class="video-card" style="animation-delay:${i * 80}ms">
+                    <div class="video-label">
+                        <i class="fab fa-youtube"></i>
+                        ${v.label || `Video ${i + 1}`}
+                    </div>
+                    <div class="video-frame-wrap">
+                        <iframe
+                            src="${embedUrl}"
+                            title="${v.label || 'Video'}"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>`;
+            }).join('');
+
+            return `
+        <div class="videos-section">
+            <div class="videos-title">
+                <i class="fab fa-youtube"></i>
+                Dars videolari
+            </div>
+            <div class="videos-grid">
+                ${cards}
+            </div>
+        </div>`;
+        }
+
+        // ---- Render page ----
+        function renderPage(topic, grade) {
+            const color = topic.rang || '#00c6ff';
+            const gradeIcon = grade === '5-8' ? 'fa-seedling' : 'fa-graduation-cap';
+
+            // Update header
+            document.title = `${topic.title} — Kelajak Soati`;
+            document.getElementById('headerTitle').textContent = topic.title.length > 30
+                ? topic.title.slice(0, 30) + '…' : topic.title;
+            document.querySelector('.logo-icon').style.background =
+                `linear-gradient(135deg, ${color}, ${color}cc)`;
+            document.querySelector('.logo-icon i').className = `fas ${gradeIcon}`;
+
+            // Build page
+            document.getElementById('detailContainer').innerHTML = `
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="index.html"><i class="fas fa-rocket"></i> Kelajak Soati</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="${BACK}">${grade} sinf</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>${topic.title}</span>
+        </nav>
+
+        <!-- Header -->
+        <div class="detail-header">
+            <div class="detail-meta">
+                <span class="detail-hafta" style="color:${color};background:${color}18;border:1px solid ${color}30">
+                    <i class="fas fa-hashtag"></i> ${topic.hafta}-mavzu
+                </span>
+                <span class="detail-date">
+                    <i class="fas fa-clock"></i> ${fmtDate(topic.date)}
+                </span>
+                <span class="detail-grade-badge">
+                    <i class="fas ${gradeIcon}"></i> ${grade} sinf
+                </span>
+            </div>
+            <h1>${topic.title}</h1>
+            <p class="detail-qisqa" style="border-color:${color}">${topic.qisqa}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="detail-body" id="detailBody">
+            ${renderMd(topic.content)}
+        </div>
+
+        <!-- Back -->
+        <a href="${BACK}" class="back-to-list">
+            <i class="fas fa-arrow-left"></i> Mavzular ro'yxatiga qaytish
+        </a>
+        `;
+        }
+
+        // ---- Init ----
+        (async () => {
+            const data = await getData();
+            if (!data) {
+                document.getElementById('detailContainer').innerHTML = `
+            <div class="not-found">
+                <i class="fas fa-wifi-slash"></i>
+                <h2>Ma'lumotlar yuklanmadi</h2>
+                <p>Internet aloqasini tekshiring yoki keyinroq urinib ko'ring.</p>
+                <a href="${BACK}" class="back-to-list" style="display:inline-flex;margin-top:1.5rem">
+                    <i class="fas fa-arrow-left"></i> Orqaga
+                </a>
+            </div>`;
+                return;
+            }
+
+            const topics = data[GRADE] || [];
+            const topic = topics.find(t => t.id === ID);
+
+            if (!topic) {
+                document.getElementById('detailContainer').innerHTML = `
+            <div class="not-found">
+                <i class="fas fa-search"></i>
+                <h2>Mavzu topilmadi</h2>
+                <p>Ushbu mavzu o'chirilgan yoki mavjud emas.</p>
+                <a href="${BACK}" class="back-to-list" style="display:inline-flex;margin-top:1.5rem">
+                    <i class="fas fa-arrow-left"></i> Orqaga
+                </a>
+            </div>`;
+                return;
+            }
+
+            renderPage(topic, GRADE);
+
+            // Video va ijtimoiy tarmoq havolalarini bezash
+            document.querySelectorAll('#detailBody a').forEach(link => {
+                const url = link.href;
+                const isYt = url.includes('youtube.com') || url.includes('youtu.be');
+                const isTg = url.includes('t.me');
+
+                if (isYt || isTg) {
+                    link.setAttribute('target', '_blank');
+                    link.style.fontWeight = '600';
+
+                    if (isYt) {
+                        link.innerHTML = `<i class="fab fa-youtube"></i> ` + link.innerHTML;
+                        link.style.color = '#ff0000';
+                    } else if (isTg) {
+                        link.innerHTML = `<i class="fab fa-telegram"></i> ` + link.innerHTML;
+                        link.style.color = '#0088cc';
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Kelajak Soati</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <style>
+        :root {
+            --bg: #04050f;
+            --glass: rgba(15, 18, 40, 0.7);
+            --border: rgba(255, 255, 255, 0.09);
+            --text: #f0f4ff;
+            --muted: #8892b0;
+            --green: #22c55e;
+            --green-glow: rgba(34, 197, 94, 0.3);
+            --red: #ef4444;
+            --font: 'Inter', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: #22c55e;
+            top: -150px;
+            right: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: #0072ff;
+            bottom: -100px;
+            left: -80px;
+        }
+
+        /* Card */
+        .login-card {
+            background: var(--glass);
+            backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 3rem 2.5rem;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            animation: cardIn .5s cubic-bezier(.2, .8, .2, 1) both;
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            display: grid;
+            place-items: center;
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 0 auto 1.75rem;
+            box-shadow: 0 10px 30px var(--green-glow);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.4rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.87rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .field {
+            margin-bottom: 1.25rem;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.3px;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrap i {
+            position: absolute;
+            left: 14px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            padding: 13px 14px 13px 40px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .input-wrap input:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, .12);
+        }
+
+        .toggle-pass {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px;
+            transition: color .2s;
+        }
+
+        .toggle-pass:hover {
+            color: var(--text);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            font-family: var(--font);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all .3s ease;
+            box-shadow: 0 6px 20px var(--green-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--green-glow);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn.loading {
+            opacity: .7;
+            pointer-events: none;
+        }
+
+        .error-msg {
+            background: rgba(239, 68, 68, .12);
+            border: 1px solid rgba(239, 68, 68, .25);
+            color: #fca5a5;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .error-msg.show {
+            display: flex;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--muted);
+            font-size: 0.83rem;
+            transition: color .2s;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="login-card">
+        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+        <h1>Admin Panel</h1>
+        <p class="subtitle">Kelajak Soati boshqаruv tizimi</p>
+
+        <div class="error-msg" id="errorMsg">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText">Login yoki parol noto'g'ri</span>
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+            <div class="field">
+                <label for="loginInput">Login</label>
+                <div class="input-wrap">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="loginInput" placeholder="Admin login..." autocomplete="username" required>
+                </div>
+            </div>
+            <div class="field">
+                <label for="passInput">Parol</label>
+                <div class="input-wrap">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="passInput" placeholder="Parol..." autocomplete="current-password"
+                        required>
+                    <button type="button" class="toggle-pass" id="togglePass">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="login-btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Kirish
+            </button>
+        </form>
+
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Bosh sahifaga qaytish
+        </a>
+    </div>
+
+    <script>
+        const API = 'api.php';
+        const TOKEN_KEY = 'ks_admin_token';
+
+        // Agar allaqachon kirgan bo'lsa, admin ga o'tkazamiz
+        if (localStorage.getItem(TOKEN_KEY)) {
+            window.location.href = 'admin.html';
+        }
+
+        // Parolni ko'rsatish/yashirish
+        document.getElementById('togglePass').addEventListener('click', function () {
+            const inp = document.getElementById('passInput');
+            const icon = this.querySelector('i');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                inp.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        });
+
+        // Login form
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const errDiv = document.getElementById('errorMsg');
+            const errText = document.getElementById('errorText');
+
+            const login = document.getElementById('loginInput').value.trim();
+            const password = document.getElementById('passInput').value;
+
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Tekshirilmoqda...';
+            errDiv.classList.remove('show');
+
+            try {
+                // Server orqali
+                const res = await fetch(`${API}?action=login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ login, password })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success && data.data?.token) {
+                    localStorage.setItem(TOKEN_KEY, data.data.token);
+                    window.location.href = 'admin.html';
+                    return;
+                }
+                throw new Error(data.error || 'Noto\'g\'ri ma\'lumotlar');
+
+            } catch (err) {
+                // Server ishlamayotgan bo'lsa lokal tekshirish
+                if (login === 'boysunkelajak06' && password === 'boysun2026') {
+                    localStorage.setItem(TOKEN_KEY, 'local_admin_' + Date.now());
+                    window.location.href = 'admin.html';
+                    return;
+                }
+                errText.textContent = 'Login yoki parol noto\'g\'ri!';
+                errDiv.classList.add('show');
+                btn.classList.remove('loading');
+                btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Kirish';
+
+                // Silkitish animatsiyasi
+                document.querySelector('.login-card').style.animation = 'none';
+                document.querySelector('.login-card').style.transform = 'translateX(-8px)';
+                setTimeout(() => document.querySelector('.login-card').style.transform = '', 300);
+            }
+        });
+    </script>
+</body>
+
+</html>

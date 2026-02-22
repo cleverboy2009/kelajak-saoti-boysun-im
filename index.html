@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelajak Soati — Boysun IM</title>
+    <meta name="description" content="Kelajak Soati — o'quvchilar uchun ufq kengaytiruvchi darslar va muhokamalar">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="../portal.html" class="back-btn" title="Orqaga">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div>
+                    <span class="logo-title">Kelajak Soati</span>
+                    <span class="logo-sub">Boysun Ixtisoslashtirilgan Maktabi</span>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.6rem">
+                <a href="admin-login.html" class="theme-btn" title="Admin panel"
+                    style="font-size:.8rem;text-decoration:none;color:var(--text-muted)">
+                    <i class="fas fa-shield-alt"></i>
+                </a>
+                <button class="theme-btn" id="themeBtn" aria-label="Mavzuni o'zgartirish">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>2025–2026 o'quv yili</span>
+            </div>
+            <h1>Kelajak <span class="accent">Soati</span></h1>
+            <p>Bilim, tafakkur va kelajakka qadam! O'z sinfingizni tanlang va mavzular bilan tanishing.</p>
+
+            <div class="scroll-hint">
+                <i class="fas fa-chevron-down"></i>
+                <span>Sinfni tanlang</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grade Selection -->
+    <section class="grade-section" id="sectionTanlash">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sinfni Tanlang</h2>
+                <p>Mavzular bilan tanishish uchun o'z sinfingizni bosing</p>
+            </div>
+
+            <div class="grade-grid">
+                <!-- 5-8 sinf karta -->
+                <a href="mavzular-5-8.html" class="grade-card card-junior" id="card58">
+                    <div class="card-glow"></div>
+                    <div class="card-particles">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="card-inner">
+                        <div class="grade-badge">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="grade-label">5 – 8</div>
+                        <div class="grade-text">sinf</div>
+                        <p class="grade-desc">O'rta bo'g'in o'quvchilari uchun qiziqarli mavzular va muhokamalar</p>
+                        <div class="card-stats">
+                            <span><i class="fas fa-book-open"></i> 24 mavzu</span>
+                            <span><i class="fas fa-users"></i> 4 sinf</span>
+                        </div>
+                        <div class="card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 9-11 sinf karta -->
+                <a href="mavzular-9-11.html" class="grade-card card-senior" id="card911">
+                    <div class="card-glow"></div>
+                    <div class="card-particles">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="card-inner">
+                        <div class="grade-badge">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="grade-label">9 – 11</div>
+                        <div class="grade-text">sinf</div>
+                        <p class="grade-desc">Yuqori sinf o'quvchilari uchun chuqur tahlil va kelajak rejalari</p>
+                        <div class="card-stats">
+                            <span><i class="fas fa-book-open"></i> 24 mavzu</span>
+                            <span><i class="fas fa-users"></i> 3 sinf</span>
+                        </div>
+                        <div class="card-arrow">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Strip -->
+    <section class="info-strip">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-hashtag"></i>
+                    <div>
+                        <strong>Yangi dars</strong>
+                        <span>Yangi mavzu</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <strong>45 daqiqa</strong>
+                        <span>Har bir seans</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>48 ta mavzu</strong>
+                        <span>Yil davomida</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-trophy"></i>
+                    <div>
+                        <strong>Faol ishtirok</strong>
+                        <span>Baholanadi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Boysun Ixtisoslashtirilgan Maktabi · <strong>Kelajak Soati</strong></p>
+        <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;justify-content:center">
+            <a href="../portal.html"><i class="fas fa-home"></i> Portalga qaytish</a>
+            <a href="admin-login.html"
+                style="color:var(--text-muted);font-size:.8rem;opacity:.55;transition:opacity .3s"
+                onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.55">
+                <i class="fas fa-lock"></i> Admin
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+        const icon = themeBtn.querySelector('i');
+
+        const saved = localStorage.getItem('ks_theme');
+        if (saved === 'light') {
+            body.classList.add('light-mode');
+            icon.className = 'fas fa-moon';
+        }
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('ks_theme', isLight ? 'light' : 'dark');
+            icon.style.transform = 'rotate(360deg)';
+            setTimeout(() => icon.style.transform = '', 400);
+        });
+
+        // Scroll header effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            header.classList.toggle('scrolled', window.scrollY > 30);
+        });
+
+        // Card entrance animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.grade-card, .info-item').forEach(el => observer.observe(el));
+
+        // Scroll hint click
+        document.querySelector('.scroll-hint')?.addEventListener('click', () => {
+            document.getElementById('sectionTanlash').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+
+</html>

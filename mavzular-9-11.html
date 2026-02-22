@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9–11 Sinf Mavzulari — Kelajak Soati</title>
+    <meta name="description" content="9-11 sinf o'quvchilari uchun Kelajak Soati mavzulari">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topics.css">
+</head>
+
+<body data-grade="9-11">
+
+    <div class="bg-orbs">
+        <div class="orb orb-1" style="background:var(--senior)"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <header class="header scrolled" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="back-btn" title="Orqaga">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <div class="logo-icon" style="background:linear-gradient(135deg,#a855f7,#ec4899)">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <span class="logo-title">9 – 11 Sinf</span>
+                    <span class="logo-sub">Kelajak Soati Mavzulari</span>
+                </div>
+            </div>
+            <button class="theme-btn" id="themeBtn" aria-label="Mavzuni o'zgartirish">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="topics-main">
+        <div class="topics-container">
+
+            <div class="page-hero senior">
+                <div class="page-hero-content">
+                    <div class="grade-pill senior-pill"><i class="fas fa-graduation-cap"></i> Yuqori bo'g'in</div>
+                    <h1>9 – 11 Sinf <span class="senior-accent">Mavzulari</span></h1>
+                    <p>Chuqur tahlil va kelajak rejalashtirish uchun mavzular to'plami. Mavzu ustiga bosing.</p>
+                </div>
+                <div class="page-hero-stat">
+                    <div class="stat-box senior-stat"><span id="totalCount">...</span><small>Ta mavzu</small></div>
+                </div>
+            </div>
+
+            <div class="topics-grid" id="topicsGrid">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Mavzular yuklanmoqda...</p>
+                </div>
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display:none">
+                <i class="fas fa-search"></i>
+                <h3>Mavzu topilmadi</h3>
+                <p>Hozircha mavzular qo'shilmagan</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="topics.js"></script>
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const icon = themeBtn.querySelector('i');
+        if (localStorage.getItem('ks_theme') === 'light') {
+            document.body.classList.add('light-mode');
+            icon.className = 'fas fa-moon';
+        }
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('ks_theme', isLight ? 'light' : 'dark');
+        });
+    </script>
+</body>
+
+</html>
